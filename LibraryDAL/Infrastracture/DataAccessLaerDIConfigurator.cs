@@ -1,7 +1,8 @@
 ﻿using LibraryDAL.Context;
 using LibraryDAL.Entities;
-using LibraryDAL.repo;
+
 using LibraryDAL.Repository;
+using LibraryDAL.UoW;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace LibraryDAL.Infrastracture
         {
             servisecollection.AddSingleton<LibraryContext>();
             servisecollection.AddTransient<IRepository<Author>, AutorRepository>();
+            servisecollection.AddTransient<IUnitOfWork, UnitOfWork>();
 
         }
     }

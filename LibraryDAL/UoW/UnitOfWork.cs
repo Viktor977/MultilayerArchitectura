@@ -1,5 +1,5 @@
 ﻿using LibraryDAL.Context;
-using LibraryDAL.repo;
+using LibraryDAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,7 +26,7 @@ namespace LibraryDAL.UoW
         }
         public void Dispose()
         {
-            throw new NotImplementedException();
+          
         }
     }
 }

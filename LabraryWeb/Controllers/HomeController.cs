@@ -1,4 +1,5 @@
 ﻿using LabraryWeb.Models;
+using LibraryBLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,18 @@ namespace LabraryWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IAuthorService _authorService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IAuthorService authorService)
         {
-            _logger = logger;
+            _authorService = authorService;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            var authors = _authorService.GetAllAuthors();
+            return View(authors);
         }
 
         public IActionResult Privacy()

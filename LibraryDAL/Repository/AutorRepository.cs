@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LibraryDAL.repo
+namespace LibraryDAL.Repository
 {
     public class AutorRepository : IRepository<Author>
     {
@@ -26,14 +26,27 @@ namespace LibraryDAL.repo
             return false;
         }
 
-     
+      
 
         public bool Delete(Guid id)
         {
+            var authors = _libraryContext.Authors.ToList();
+            var authhorForDelete=
+             _libraryContext.Authors.FirstOrDefault(t => t.Id == id);
+            if (authhorForDelete == null)
+            {
+               // throw new NullReferenceException();
+                return false;
+            }
+            authors.Remove(authhorForDelete);
             return true;
         }
 
-        
+        public IEnumerable<Author> GetAll()
+        {
+            var authors = _libraryContext.Authors;
+            return authors;
+        }
 
         public Author GetBaseEntityById(Guid id)
         {
@@ -55,15 +68,14 @@ namespace LibraryDAL.repo
             }
             author.LastName = newAuthor.LastName;
             author.MiddleName = newAuthor.MiddleName;
-
-
+            author.dateOfBith = newAuthor.dateOfBith;
+            author.FirstName = newAuthor.FirstName;
+            author.Book = newAuthor.Book;
+ 
             return author;
 
         }
 
-        IEnumerable<Author> IRepository<Author>.GetAll()
-        {
-           return _libraryContext.Authors;
-        }
+        
     }
 }

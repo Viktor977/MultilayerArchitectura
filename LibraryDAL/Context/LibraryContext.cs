@@ -11,6 +11,10 @@ namespace LibraryDAL.Context
         public Guid BookId { get; set; }
         public IEnumerable<Author> Authors { get; set; }
         public IEnumerable<Book> Books { get; set; }
+        public LibraryContext()
+        {
+            Initilazed(); 
+        }
         public  void Initilazed()
         {
             Author author1 = new Author { LastName = "q", MiddleName = "qw", dateOfBith = DateTime.UtcNow };
@@ -19,11 +23,12 @@ namespace LibraryDAL.Context
             Book b1 = new Book {Name="",Ganre=Ganre.fixition,Amount=100 };
 
             b1.Autor = new List<AutorBook>() { new AutorBook { AuthorId = author1.Id }, };
-
+            Authors = new List<Author>() { author1, author2, author3 };
+           
             Book b2 = new Book {Name="",Ganre=Ganre.fixition,Amount=100 };
             Book b3 = new Book {Name="",Ganre=Ganre.fixition,Amount=100 };
             Book b4 = new Book {Name="",Ganre=Ganre.fixition,Amount=100 };
-
+           
         }
     }
 }
